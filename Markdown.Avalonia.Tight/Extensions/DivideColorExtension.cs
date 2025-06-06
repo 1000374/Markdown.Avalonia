@@ -30,7 +30,7 @@ namespace Markdown.Avalonia.Extensions
             IBinding left;
             if (Color.TryParse(_frmKey, out var leftColor))
             {
-                left = new StaticBinding(leftColor);
+                left = new Binding { Source = new SolidColorBrush(leftColor), Mode = BindingMode.OneTime };//new StaticBinding(leftColor);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace Markdown.Avalonia.Extensions
             IBinding right;
             if (Color.TryParse(_toKey, out var rightColor))
             {
-                right = new StaticBinding(rightColor);
+                right = new Binding { Source = new SolidColorBrush(rightColor), Mode = BindingMode.OneTime };//new StaticBinding(rightColor);
             }
             else
             {
@@ -56,7 +56,7 @@ namespace Markdown.Avalonia.Extensions
             };
         }
     }
-
+    [Obsolete("Avalonia11.3 not support",true)]
     class StaticBinding : IBinding
     {
         private readonly object _value;
