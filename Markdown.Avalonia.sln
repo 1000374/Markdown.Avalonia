@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmark", "benchmark", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MdAvBench", "benchmark\MdAvBench\MdAvBench.csproj", "{57CC28E5-9915-4AFA-A5E5-B7977BBF8589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMD.Avalonia11.3", "TestMD\TestMD.Avalonia11.3.csproj", "{F4B0CD15-0635-45AD-A35C-019E81B9A229}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMD", "TestMD\TestMD.csproj", "{F4B0CD15-0635-45AD-A35C-019E81B9A229}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
