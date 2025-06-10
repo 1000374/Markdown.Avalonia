@@ -31,7 +31,7 @@ namespace Markdown.Avalonia.Html.Core
             _blockBindParsers = new();
             _bindParsers = new();
 
-            UnknownTags = UnknownTagsOption.Drop;
+            UnknownTags = UnknownTagsOption.PassThrough;
 
             Register(new TagIgnoreParser());
             Register(new CommentParsre());
