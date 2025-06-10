@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>$(PackageTargetFrameworks)</TargetFrameworks>
     <PackageId>Markdown.Avalonia.Svg</PackageId>
     <Version>$(PackageVersion)</Version>
     <Authors>grifsun; whistyun</Authors>

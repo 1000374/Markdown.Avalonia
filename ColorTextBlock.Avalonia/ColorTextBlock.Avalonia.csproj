@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>$(PackageTargetFrameworks)</TargetFrameworks>
     <PackageId>ColorTextBlock.Avalonia</PackageId>
     <Version>$(PackageVersion)</Version>
     <Authors>whistyun</Authors>
