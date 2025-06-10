@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>$(PackageTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <PackageId>Markdown.Avalonia.Svg</PackageId>
     <Version>$(PackageVersion)</Version>
     <Authors>grifsun; whistyun</Authors>
@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Svg" Version="$(AvaloniaSvgVersion)" />
+    <PackageReference Include="Avalonia" Version="11.3.0" />
+    <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.0.1" />
   </ItemGroup>
   
   <ItemGroup>

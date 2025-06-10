@@ -3,7 +3,7 @@
   <Import Project="..\Markdown.Avalonia.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>$(PackageTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <Version>$(PackageVersion)</Version>
     <Authors>Bevan Arps(original); whistyun</Authors>
     <PackageId>Markdown.Avalonia</PackageId>

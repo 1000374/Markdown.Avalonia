@@ -1,44 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
 
-  <Import Project="..\..\Markdown.Avalonia.props" />
+	<ItemGroup>
+		<Folder Include="Models\" />
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <IsPackable>false</IsPackable>
-    <TargetFrameworks>$(DemoAppTargetFrameworks)</TargetFrameworks>
-    <LangVersion>9</LangVersion>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7' ">
-    <PublishAot>true</PublishAot>
-  </PropertyGroup>
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <AvaloniaXaml Remove="Assets\AppendingStyles.axaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="$(DemoAvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Desktop" Version="$(DemoAvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="$(DemoAvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Themes.Simple" Version="$(DemoAvaloniaVersion)" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="$(DemoAvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="$(DemoAvaloniaVersion)" />
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.3.0" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.3.0" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.0" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.0" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Include="Avalonia.Diagnostics" Version="11.3.0">
+			<IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.3.0" />
+		<PackageReference Include="Serilog" Version="3.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+	</ItemGroup>
 
-    <PackageReference Include="Serilog" Version="3.0.1" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <None Remove="Assets\XamlTemplate.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Markdown.Avalonia\Markdown.Avalonia.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="LocalPath.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="MainWindow.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Markdown.Avalonia\Markdown.Avalonia.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="MainWindow.md">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

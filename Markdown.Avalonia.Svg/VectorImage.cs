@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using Avalonia;
 using Avalonia.Media;
-using Avalonia.Svg;
-using ShimSkiaSharp;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia.Rendering.SceneGraph;
+using Avalonia.Skia;
+using Avalonia.Svg.Skia;
+using SkiaSharp;
+using Svg.Skia;
 
 namespace Markdown.Avalonia.Svg
 {
@@ -21,9 +27,6 @@ namespace Markdown.Avalonia.Svg
         public Size Size =>
             Source?.Picture is { } ? new Size(Source.Picture.CullRect.Width, Source.Picture.CullRect.Height) : default;
 
-        private SKPicture? _previousPicture = null;
-        private AvaloniaPicture? _avaloniaPicture = null;
-
         /// <inheritdoc/>
         void IImage.Draw(
             DrawingContext context,
@@ -31,11 +34,9 @@ namespace Markdown.Avalonia.Svg
             Rect destRect)
         {
             var source = Source;
+
             if (source?.Picture is null)
             {
-                _previousPicture = null;
-                _avaloniaPicture?.Dispose();
-                _avaloniaPicture = null;
                 return;
             }
 
@@ -49,32 +50,17 @@ namespace Markdown.Avalonia.Svg
                 destRect.Width / sourceRect.Width,
                 destRect.Height / sourceRect.Height);
             var translateMatrix = Matrix.CreateTranslation(
-                -sourceRect.X + destRect.X - bounds.Left,
-                -sourceRect.Y + destRect.Y - bounds.Top);
+                -sourceRect.X + destRect.X - bounds.Top,
+                -sourceRect.Y + destRect.Y - bounds.Left);
             using (context.PushClip(destRect))
-            using (context.PushTransform(translateMatrix))
-            using (context.PushTransform(scaleMatrix))
+            using (context.PushTransform(scaleMatrix * translateMatrix))
             {
-                try
-                {
-                    if (_avaloniaPicture is null || source.Picture != _previousPicture)
-                    {
-                        _previousPicture = source.Picture;
-                        _avaloniaPicture?.Dispose();
-                        _avaloniaPicture = AvaloniaPicture.Record(source.Picture);
-                    }
-
-                    if (_avaloniaPicture is { })
-                    {
-                        _avaloniaPicture.Draw(context);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"{ex.Message}");
-                    Debug.WriteLine($"{ex.StackTrace}");
-                }
+                context.Custom(
+                    new SvgSourceCustomDrawOperation(
+                        new Rect(0, 0, bounds.Width, bounds.Height),
+                        source));
             }
         }
+
     }
 }

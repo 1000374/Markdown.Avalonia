@@ -35,23 +35,23 @@ namespace Markdown.AvaloniaDemo
 
             try
             {
-                var old = ctrl.GetValue(MyLastParsedProperty);
-                if (old == xamlTxt) return xamlTxt;
+            //    var old = ctrl.GetValue(MyLastParsedProperty);
+            //    if (old == xamlTxt) return xamlTxt;
 
-                var style = (Styles)AvaloniaRuntimeXamlLoader.Load(xamlTxt);
-                style.SetValue(MyIdProperty, nameof(DynamicStyleBehavior));
+            //    var style = (Styles)AvaloniaRuntimeXamlLoader.Load(xamlTxt);
+            //    style.SetValue(MyIdProperty, nameof(DynamicStyleBehavior));
 
-                foreach (var exists in ctrl.Styles.ToArray())
-                    if (exists is Styles existsStyle)
-                        if (existsStyle.GetValue(MyIdProperty) == nameof(DynamicStyleBehavior))
-                            ctrl.Styles.Remove(exists);
+            //    foreach (var exists in ctrl.Styles.ToArray())
+            //        if (exists is Styles existsStyle)
+            //            if (existsStyle.GetValue(MyIdProperty) == nameof(DynamicStyleBehavior))
+            //                ctrl.Styles.Remove(exists);
 
 
-                ctrl.SetValue(MyLastParsedProperty, xamlTxt);
-                ctrl.Styles.Add(style);
+            //    ctrl.SetValue(MyLastParsedProperty, xamlTxt);
+            //    ctrl.Styles.Add(style);
 
-                var resultMsgr = ctrl.GetValue(ValidationResultProperty);
-                resultMsgr?.Execute(null);
+            //    var resultMsgr = ctrl.GetValue(ValidationResultProperty);
+            //    resultMsgr?.Execute(null);
             }
             catch (Exception e)
             {

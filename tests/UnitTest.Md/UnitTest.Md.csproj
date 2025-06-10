@@ -3,15 +3,15 @@
   <Import Project="..\UnitTest.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>$(TestTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <LangVersion>9</LangVersion>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="$(TestAvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Desktop" Version="$(TestAvaloniaVersion)" />
+    <PackageReference Include="Avalonia" Version="11.3.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,5 +24,12 @@
     <None Update="Texts\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="ApprovalTests" Version="7.0.0-beta.3" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Update="nunit" Version="4.3.2" />
+    <PackageReference Update="NUnit3TestAdapter" Version="5.1.0-alpha.3" />
   </ItemGroup>
 </Project>

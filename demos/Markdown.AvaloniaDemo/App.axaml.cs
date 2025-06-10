@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Markdown.AvaloniaDemo.ViewModels;
@@ -6,7 +6,7 @@ using Markdown.AvaloniaDemo.Views;
 
 namespace Markdown.AvaloniaDemo
 {
-    public class App : Application
+    public partial class App : Application
     {
         public override void Initialize()
         {
@@ -25,5 +25,6 @@ namespace Markdown.AvaloniaDemo
 
             base.OnFrameworkInitializationCompleted();
         }
+
     }
 }
