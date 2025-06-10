@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform;
 using Avalonia.Styling;
-using Avalonia.Themes.Simple;
 using Markdown.Avalonia;
 using ReactiveUI;
 using System;

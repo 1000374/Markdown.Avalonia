@@ -1,148 +1,145 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+﻿<Window
+    x:Class="Markdown.AvaloniaDemo.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+    xmlns:local="clr-namespace:Markdown.AvaloniaDemo;assembly=Markdown.AvaloniaDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+    xmlns:mde="https://github.com/whistyun/Markdown.Avalonia.SyntaxHigh"
+    xmlns:vm="clr-namespace:Markdown.AvaloniaDemo.ViewModels;assembly=Markdown.AvaloniaDemo"
+    Title="Markdown.AvaloniaDemo"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    x:CompileBindings="True"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
-        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-        xmlns:vm="clr-namespace:Markdown.AvaloniaDemo.ViewModels;assembly=Markdown.AvaloniaDemo"
-        xmlns:local="clr-namespace:Markdown.AvaloniaDemo;assembly=Markdown.AvaloniaDemo"
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
 
-        xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
-        xmlns:mde="https://github.com/whistyun/Markdown.Avalonia.SyntaxHigh"
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
 
-        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
-        x:Class="Markdown.AvaloniaDemo.Views.MainWindow"
-        
-        x:DataType="vm:MainWindowViewModel"
-        x:CompileBindings="True"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="Markdown.AvaloniaDemo"
-        >
+        <TabControl
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            VerticalAlignment="Stretch">
 
-  <Design.DataContext>
-    <vm:MainWindowViewModel/>
-  </Design.DataContext>
+            <TabItem
+                Grid.Row="0"
+                Grid.Column="0"
+                Header="Source">
 
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="10*"/>
-      <ColumnDefinition Width="10*"/>
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="10*"/>
-    </Grid.RowDefinitions>
+                <TextBox
+                    VerticalAlignment="Stretch"
+                    AcceptsReturn="True"
+                    Text="{Binding Text}"
+                    TextWrapping="Wrap" />
 
-    <TabControl
-      Grid.Row="0"
-      Grid.Column="0"
-      Grid.RowSpan="2"
-      VerticalAlignment="Stretch">
+            </TabItem>
 
-      <TabItem
-          Header="Source"
-          Grid.Row="0"
-          Grid.Column="0"
-          >
+            <TabItem Header="Style">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10*" />
+                    </Grid.RowDefinitions>
 
-        <TextBox
-          VerticalAlignment="Stretch"
-          AcceptsReturn="True"
-          Text="{Binding Text}"
-          TextWrapping="Wrap"
-          />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        Text="Markdown Style" />
 
-      </TabItem>
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        ItemsSource="{Binding Styles}"
+                        SelectedItem="{Binding SelectedStyle}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-      <TabItem Header="Style">
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="10*"/>
-          </Grid.ColumnDefinitions>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10*"/>
-          </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="1"
+                        Padding="1"
+                        BorderBrush="{DynamicResource ThemeBorderHighBrush}"
+                        BorderThickness="1">
 
-          <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              VerticalAlignment="Center"
-              Text="Markdown Style"/>
+                        <DockPanel LastChildFill="True">
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                                <TextBlock DockPanel.Dock="Left">Append Styles</TextBlock>
+                                <Button
+                                    Command="{Binding TryParse}"
+                                    Content="Parse"
+                                    DockPanel.Dock="Right" />
+                            </DockPanel>
 
-          <ComboBox
-              Grid.Row="0"
-              Grid.Column="1"
-              SelectedItem="{Binding SelectedStyle}"
-              ItemsSource="{Binding Styles}"
-              >
-            <ComboBox.ItemTemplate>
-              <DataTemplate>
-                <TextBlock Text="{Binding Name}"/>
-              </DataTemplate>
-            </ComboBox.ItemTemplate>
-          </ComboBox>
+                            <Expander
+                                DockPanel.Dock="Bottom"
+                                Header="Error"
+                                IsExpanded="True">
+                                <TextBlock Foreground="Red" Text="{Binding ErrorInfo}" />
+                            </Expander>
+                            <TextBox
+                                AcceptsReturn="True"
+                                Text="{Binding EdittingStyleXamlText}"
+                                TextWrapping="NoWrap" />
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
 
-          <Border
-              Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              Padding="1"
-              Margin="1"
-              BorderThickness="1" BorderBrush="{DynamicResource ThemeBorderHighBrush}">
+        </TabControl>
 
-            <DockPanel LastChildFill="True">
-              <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-                <TextBlock DockPanel.Dock="Left">Append Styles</TextBlock>
-                <Button DockPanel.Dock="Right" Content="Parse" Command="{Binding TryParse}"/>
-              </DockPanel>
+        <Label
+            x:Name="Breadcrumb"
+            Grid.Row="0"
+            Grid.Column="1"
+            BorderThickness="0,0,0,1"
+            Content=" " />
 
-              <Expander Header="Error" DockPanel.Dock="Bottom" IsExpanded="True">
-                <TextBlock Foreground="Red"
-                           Text="{Binding ErrorInfo}"/>
-              </Expander>
-              <TextBox
-                  AcceptsReturn="True"
-                  TextWrapping="NoWrap"
-                  Text="{Binding EdittingStyleXamlText}"
-                  />
-            </DockPanel>
-          </Border>
-        </Grid>
-      </TabItem>
+        <md:MarkdownScrollViewer
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            local:DynamicStyleBehavior.ValidationResult="{Binding XamlParseResult}"
+            local:DynamicStyleBehavior.XamlText="{Binding AppendStyleXamlText}"
+            HeaderScrolled="HeaderScrolled"
+            Markdown="{Binding Text}"
+            MarkdownStyleName="{Binding SelectedStyle.Name}"
+            SaveScrollValueWhenContentUpdated="True">
+            <md:MarkdownScrollViewer.Plugins>
+                <md:MdAvPlugins>
+                    <mde:SyntaxHighlight>
+                        <mde:Alias Name="peg" XSHD="avares://Markdown.AvaloniaDemo/Assets/Pegasus-Mode.xshd" />
+                    </mde:SyntaxHighlight>
+                </md:MdAvPlugins>
+            </md:MarkdownScrollViewer.Plugins>
 
-    </TabControl>
-
-    <Label
-      x:Name="Breadcrumb"
-      Grid.Row="0"
-      Grid.Column="1"
-      Content=" "
-      BorderThickness="0,0,0,1"
-      />
-    
-    <md:MarkdownScrollViewer
-      Grid.Row="1"
-      Grid.Column="1"
-      VerticalAlignment="Stretch"
-      MarkdownStyleName="{Binding SelectedStyle.Name}"
-      SaveScrollValueWhenContentUpdated="True"
-      Markdown="{Binding Text}"
-      HeaderScrolled="HeaderScrolled"
-      
-      local:DynamicStyleBehavior.XamlText="{Binding AppendStyleXamlText}"
-      local:DynamicStyleBehavior.ValidationResult="{Binding XamlParseResult}"
-      >
-      <md:MarkdownScrollViewer.Plugins>
-        <md:MdAvPlugins>
-          <mde:SyntaxHighlight>
-            <mde:Alias Name="peg" XSHD="avares://Markdown.AvaloniaDemo/Assets/Pegasus-Mode.xshd" />
-          </mde:SyntaxHighlight>
-        </md:MdAvPlugins>
-      </md:MarkdownScrollViewer.Plugins>
-
-    </md:MarkdownScrollViewer>
-  </Grid>
+        </md:MarkdownScrollViewer>
+    </Grid>
 
 </Window>

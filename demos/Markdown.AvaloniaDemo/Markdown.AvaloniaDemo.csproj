@@ -1,4 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\Markdown.Avalonia.props" />
+	
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>$(DemoAppTargetFrameworks)</TargetFramework>
@@ -33,6 +36,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="LocalPath.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="MainWindow.md">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
